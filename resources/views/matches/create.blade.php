@@ -61,6 +61,12 @@
 
                 </div>
 
+                <div>
+                    <x-form.input-label for="desc" :value="__('Description')" />
+                    <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc"/>
+                    <x-form.input-error class="mt-2" :messages="$errors->get('desc')" />
+                </div>
+
 
                 <div class="grid grid-cols-2 space-x-4">
 
@@ -84,7 +90,6 @@
 
         </x-panel>
     </main>
-
 
 </x-app-layout>
 

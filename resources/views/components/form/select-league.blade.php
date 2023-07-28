@@ -57,7 +57,8 @@
     }
 
     .select_wrap .select_ul li:hover{
-        background: #fff4dd;
+        background-color: lightblue;
+        color: #FFFFFF;
     }
 
     .select_wrap .option{
@@ -80,7 +81,6 @@
         transform: rotate(-225deg);
     }
 </style>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <select {{$attributes->merge(['class' => 'hidden'])}} >
     <option disabled selected>Select a league</option>
@@ -88,8 +88,6 @@
         <option value="{{$league->id}}">{{ $league->name }}</option>
     @endforeach
 </select>
-
-
 
 <div class="select_wrap border-2 border-gray-200 rounded-lg ">
     <ul class="default_option">
@@ -99,6 +97,11 @@
         </li>
     </ul>
     <ul class="select_ul overflow-y-scroll max-h-52">
+        <li>
+            <div class="option null">
+                <p>Select league</p>
+            </div>
+        </li>
         @foreach($leagues as $league)
             <li>
                 <div class="option {{$league->id}}">

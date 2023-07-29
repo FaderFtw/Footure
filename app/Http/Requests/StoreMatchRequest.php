@@ -24,7 +24,7 @@ class StoreMatchRequest extends FormRequest
             'time' => ['required', 'exclude'],
             'date' => ['required', new AfterOrEqualCombinedDateTime()],
             'desc' => ['string','nullable'],
-            'stadium' => ['string',],
+            'stadium' => ['string','nullable'],
             'referee' => ['required','string']
         ];
 

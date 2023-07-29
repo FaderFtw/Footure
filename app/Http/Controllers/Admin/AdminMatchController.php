@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Models\League;
 use App\Models\Matche;
+use App\Models\Team;
 use DateTime;
 
 class AdminMatchController extends Controller
@@ -22,7 +23,7 @@ class AdminMatchController extends Controller
     public function createNext()
     {
         request()->validate(['league_id' => 'required']);
-        return view('matches.createNext', ['league' =>League::with(['teams'])->find(request()->input('league_id'))]);
+        return view('matches.createNext', ['league' =>League::find(request()->input('league_id'))]);
     }
 
     /**
@@ -35,8 +36,10 @@ class AdminMatchController extends Controller
         unset($attributes['time']);
 
         $date= date('Y-m-d H:i', strtotime($attributes['date']));
-
         $attributes['date']= $date;
+
+        if (!$attributes['stadium'])
+            $attributes['stadium'] = Team::find($attributes['team_id_home'])->stadium;
 
         Matche::create($attributes);
 
@@ -47,20 +50,19 @@ class AdminMatchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Matche $match)
+    public function edit(Matche $matche)
     {
-        dd($match);
-        return view('matches.edit', ['match' => $match::with(['score'])]);
+        return view('matches.edit', ['match' => $matche]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update( Matche $match)
+    public function update(UpdateMatchRequest $request,Matche $matche)
     {
         $attributes = $request->input();
 
-        $match->update($attributes);
+        $matche->update($attributes);
 
         return redirect(route('admin.matches'))->with('success', 'Match Updated');
     }

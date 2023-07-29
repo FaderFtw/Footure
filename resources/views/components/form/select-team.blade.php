@@ -3,8 +3,6 @@
     $selectBarId = 'select_bar_' . uniqid();
 @endphp
 
-
-
 <style>
 
     .select_wrap{{$selectBarId}}{
@@ -89,7 +87,7 @@
     }
 </style>
 
-<select {{$attributes->merge(['class' => 'hidden'])}} onchange="toggleOtherFields(this)">
+<select {{$attributes->merge(['class' => 'hidden'])}} >
     <option disabled selected>Select a team</option>
     @foreach($teams as $team)
         <option value="{{$team->id}}">{{ $team->name }}</option>
@@ -121,6 +119,7 @@
 </div>
 
 <script>
+
     // Function to handle custom dropdown toggle
     function toggleDropdown() {
         const dropdownOptions = document.querySelector('.select_ul{{$selectBarId}}');

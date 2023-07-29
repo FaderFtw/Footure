@@ -49,6 +49,7 @@ class AdminMatchController extends Controller
      */
     public function edit(Matche $match)
     {
+        dd($match);
         return view('matches.edit', ['match' => $match::with(['score'])]);
     }
 

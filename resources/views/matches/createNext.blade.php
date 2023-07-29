@@ -26,7 +26,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_home" :value="__('Home Team')" class="ml-2"/>
-                        <x-form.select-team id="team_id_home" name="team_id_home"  class="block"  :teams="$league->teamsOrderedByName" :team="old('team_id_home')" required autofocus autocomplete="team_id_home"/>
+                        <x-form.select-team id="team_id_home" name="team_id_home"  class="block"  :teams="$league->teamsOrderedByName" :team="$league->teamsOrderedByName[0]->id" required autofocus autocomplete="team_id_home"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_home')" />
                     </div>
 
@@ -36,7 +36,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_away" :value="__('Away Team')" class="ml-2"/>
-                        <x-form.select-team id="team_id_away" name="team_id_away"  class="block"  :teams="$league->teamsOrderedByName" :team="old('team_id_away')" required autofocus autocomplete="team_id_away"/>
+                        <x-form.select-team id="team_id_away" name="team_id_away"  class="block"  :teams="$league->teamsOrderedByName" :team="$league->teamsOrderedByName[0]->id" required autofocus autocomplete="team_id_away"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_away')" />
                     </div>
                 </div>

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/admin_dashboard/matches/create', [AdminMatchController::class, 'create'])->name('match.create');
     Route::get('/admin_dashboard/matches/create/next', [AdminMatchController::class, 'createNext'])->name('match.createNext');
     Route::post('/admin_dashboard/matches', [AdminMatchController::class, 'store'])->name('match.store');
-    Route::get('/admin_dashboard/matches/{matche}/edit', [AdminMatchController::class, 'edit'])->name('match.edit');
+    Route::get('/admin_dashboard/matches/edit/{matche}', [AdminMatchController::class, 'edit'])->name('match.edit');
     Route::patch('/admin_dashboard/matches/{matche}', [AdminMatchController::class, 'update'])->name('match.update');
     Route::delete('/admin_dashboard/matches/{matche}', [AdminMatchController::class, 'destroy'])->name('match-destroy');
 

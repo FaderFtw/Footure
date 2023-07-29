@@ -28,7 +28,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_home" :value="__('Home Team')" class="ml-2"/>
-                        <x-form.select-team id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :team="$match->homeTeam" required autofocus autocomplete="team_id_home"/>
+                        <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :team="$match->homeTeam" required autofocus autocomplete="team_id_home"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_home')" />
                     </div>
 
@@ -38,7 +38,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_away" :value="__('Away Team')" class="ml-2"/>
-                        <x-form.select-team id="team_id_away" name="team_id_away"  class="block"  :teams="$match->league->teamsOrderedByName"  :team="$match->awayTeam" :team="old('team_id_away')" required autofocus autocomplete="team_id_away"/>
+                        <x-form.select-awayTeam id="team_id_away" name="team_id_away"  class="block"  :teams="$match->league->teamsOrderedByName"  :team="$match->awayTeam" :team="old('team_id_away')" required autofocus autocomplete="team_id_away"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_away')" />
                     </div>
                 </div>
@@ -64,7 +64,7 @@
 
                 <div>
                     <x-form.input-label for="desc" :value="__('Description')" />
-                    <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc"/>
+                    <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc">{{$match->desc}}</x-form.text-area>
                     <x-form.input-error class="mt-2" :messages="$errors->get('desc')" />
                 </div>
 

@@ -30,7 +30,7 @@
                 <div>
                     <x-form.input-label for="desc" :value="__('Description')" />
                     <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc">
-                        {{old('desc',$league->desc)}}
+                        {{$league->desc}}
                     </x-form.text-area>
                     <x-form.input-error class="mt-2" :messages="$errors->get('desc')" />
                 </div>

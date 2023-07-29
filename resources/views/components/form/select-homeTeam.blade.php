@@ -1,6 +1,6 @@
 <style>
 
-    .select_wrap{
+    .select_wrapHomeTeam{
         z-index: 7;
         margin: 3px;
         width: 100%;
@@ -8,18 +8,18 @@
         user-select: none;
     }
 
-    .select_wrap .default_option{
+    .select_wrapHomeTeam .default_optionHomeTeam{
         background: #fff;
         border-radius: 5px;
         position: relative;
         cursor: pointer;
     }
 
-    .select_wrap .default_option li{
+    .select_wrapHomeTeam .default_optionHomeTeam li{
         padding: 8px 20px;
     }
 
-    .select_wrap .default_option:before{
+    .select_wrapHomeTeam .default_optionHomeTeam:before{
         content: "";
         position: absolute;
         top: 18px;
@@ -31,7 +31,7 @@
         transform: rotate(-45deg);
     }
 
-    .select_wrap .select_ul{
+    .select_wrapHomeTeam .select_ulHomeTeam{
         position: absolute;
         top: 55px;
         left: 0;
@@ -41,72 +41,72 @@
         display: none;
     }
 
-    .select_wrap .select_ul li{
+    .select_wrapHomeTeam .select_ulHomeTeam li{
         padding: 8px 20px;
         cursor: pointer;
     }
 
-    .select_wrap .select_ul li:first-child:hover{
+    .select_wrapHomeTeam .select_ulHomeTeam li:first-child:hover{
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
 
-    .select_wrap .select_ul li:last-child:hover{
+    .select_wrapHomeTeam .select_ulHomeTeam li:last-child:hover{
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
 
-    .select_wrap .select_ul li:hover{
+    .select_wrapHomeTeam .select_ulHomeTeam li:hover{
         background-color: lightblue;
         color: #FFFFFF;
     }
 
-    .select_wrap .option{
+    .select_wrapHomeTeam .option{
         display: flex;
         align-items: center;
     }
 
-    .select_wrap .option .icon{
+    .select_wrapHomeTeam .option .iconHomeTeam{
         width: 32px;
         height: 32px;
         margin-right: 15px;
     }
 
-    .select_wrap.active .select_ul{
+    .select_wrapHomeTeam.active .select_ulHomeTeam{
         display: block;
     }
 
-    .select_wrap.active .default_option:before{
+    .select_wrapHomeTeam.active .default_optionHomeTeam:before{
         top: 25px;
         transform: rotate(-225deg);
     }
 </style>
 
-<select {{$attributes->merge(['class' => 'hidden'])}}>
-    <option disabled selected>Select a league</option>
-    @foreach($leagues as $league)
-        <option value="{{$league->id}}">{{ $league->name }}</option>
+<select {{$attributes->merge(['class' => 'hidden'])}} >
+    <option disabled selected>Select a team</option>
+    @foreach($teams as $team)
+        <option value="{{$team->id}}">{{ $team->name }}</option>
     @endforeach
 </select>
 
-<div class="select_wrap border-2 border-gray-200 rounded-lg ">
-    <ul class="default_option">
+<div class="select_wrapHomeTeam border-2 border-gray-200 rounded-lg ">
+    <ul class="default_optionHomeTeam">
         <li>
-            <div class="icon"></div>
-            <p>Select league</p>
+            <div class="iconHomeTeam"></div>
+            <p>Select team</p>
         </li>
     </ul>
-    <ul class="select_ul overflow-y-scroll max-h-52">
+    <ul class="select_ulHomeTeam overflow-y-scroll max-h-52">
         <li>
             <div class="option null">
-                <p>Select league</p>
+                <p>Select team</p>
             </div>
         </li>
-        @foreach($leagues as $league)
+        @foreach($teams as $team)
             <li>
-                <div class="option {{$league->id}}">
-                    <div class="icon justify-center flex items-center"><img width="20" height="20" src="{{asset($league->logo)}}" alt="League image"></div>
-                    <p>{{ucwords($league->name)}}</p>
+                <div class="option {{$team->id}}">
+                    <div class="iconHomeTeam justify-center flex items-center"><img width="50" height="50" src="{{asset($team->logo)}}" alt="Home Team image"></div>
+                    <p>{{ucwords($team->name)}}</p>
                 </div>
             </li>
         @endforeach
@@ -116,7 +116,7 @@
 <script>
     // Function to handle custom dropdown toggle
     function toggleDropdown() {
-        const dropdownOptions = document.querySelector('.select_ul');
+        const dropdownOptions = document.querySelector('.select_ulHomeTeam');
         dropdownOptions.classList.toggle('show');
     }
 
@@ -126,34 +126,34 @@
         if (option) {
             const value = option.classList[1];
             const label = option.querySelector('p').textContent;
-            const selectElement = document.getElementById('league_id');
+            const selectElement = document.getElementById('team_id_home');
             selectElement.value = value;
-            document.querySelector('.default_option li p').textContent = label;
+            document.querySelector('.default_optionHomeTeam li p').textContent = label;
             toggleDropdown();
         }
     }
 
     // Event listeners for dropdown interaction
-    document.querySelector('.default_option').addEventListener('click', toggleDropdown);
-    document.querySelector('.select_ul').addEventListener('click', selectOption);
+    document.querySelector('.default_optionHomeTeam').addEventListener('click', toggleDropdown);
+    document.querySelector('.select_ulHomeTeam').addEventListener('click', selectOption);
 
     // Close the dropdown when clicking outside it
     window.addEventListener('click', function (event) {
-        const dropdownContainer = document.querySelector('.select_wrap');
+        const dropdownContainer = document.querySelector('.select_wrapHomeTeam');
         if (!dropdownContainer.contains(event.target)) {
-            document.querySelector('.select_ul').classList.remove('show');
+            document.querySelector('.select_ulHomeTeam').classList.remove('show');
         }
     });
 
     $(document).ready(function(){
-        $(".default_option").click(function(){
+        $(".default_optionHomeTeam").click(function(){
             $(this).parent().toggleClass("active");
         })
 
-        $(".select_ul li").click(function(){
+        $(".select_ulHomeTeam li").click(function(){
             var currentele = $(this).html();
-            $(".default_option li").html(currentele);
-            $(this).parents(".select_wrap").removeClass("active");
+            $(".default_optionHomeTeam li").html(currentele);
+            $(this).parents(".select_wrapHomeTeam").removeClass("active");
         })
     });
 </script>

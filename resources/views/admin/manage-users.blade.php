@@ -9,7 +9,7 @@
         <x-panel>
             <div class="flex flex-shrink-0 justify-end mb-4">
                 <h4 class="flex items-center mr-6 font-bold">ADD USER</h4>
-                <a href="">
+                <a href="{{route('user.create')}}">
                     <i class="fas fa-solid fa-plus rounded-lg border-2 border-gray-300 p-3"  title="add user"></i>
                 </a>
             </div>

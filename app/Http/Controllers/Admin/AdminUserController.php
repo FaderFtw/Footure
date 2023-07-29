@@ -27,17 +27,11 @@ class AdminUserController extends Controller
     {
         $attributes = $request->input();
 
-        $originalDate = $attributes['founded_at'];
-        $dateObj = DateTime::createFromFormat('m/d/Y', $originalDate);
-        $date= $dateObj->format('Y-m-d');
-
-        $attributes['slug'] = str_replace(' ', '-', $attributes['name']);
-        $attributes['founded_at'] = $date;
-        $attributes['logo'] = $request->file('logo')->store('leagues-logos');
 
 
-        League::create($attributes);
-        return redirect('/admin_dashboard/leagues')->with('success','New League has been created.');
+
+        User::create($attributes);
+        return redirect('/admin_dashboard/leagues')->with('success','New User has been created.');
 
     }
 

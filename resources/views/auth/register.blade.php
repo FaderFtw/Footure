@@ -107,15 +107,18 @@
                 var atkRateField = document.getElementById('atkRate');
                 var midRateField = document.getElementById('midRate');
                 var defRateField = document.getElementById('defRate');
+                var positionField = document.getElementById('position');
 
                 if (select.value === '2') {
                     atkRateField.required = true;
                     midRateField.required = true;
                     defRateField.required = true;
+                    positionField.required = true;
                 } else {
                     atkRateField.required = false;
                     midRateField.required = false;
                     defRateField.required = false;
+                    positionField.required = false;
                 }
             }
         </script>

@@ -4,7 +4,7 @@
             <img src="{{asset($team->logo)}}" width="{{$width}}" height="{{$height}}" class="mb-1"  alt="League Logo">
         </div>
 
-        <p class="sm:text-md-center flex justify-center text-xs font-bold">
+        <p class="sm:text-xl flex justify-center  font-bold">
             {{$team->name}}
         </p>
     </a>

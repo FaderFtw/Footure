@@ -4,7 +4,7 @@
 
         <div class="flex-col ">
             <div class=" border-b-2 p-4 border-gray-300">
-                <x-team.team-icon :width="70" :height="70" :team="$player->team"/>
+                <x-team.team-icon :width="70" :height="70" class="text-xl" :team="$player->team"/>
             </div>
 
             <div class="flex items-center pt-20">

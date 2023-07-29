@@ -52,11 +52,13 @@ class AdminUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLeagueRequest $request, League $league)
+    public function update(, League $league)
     {
         dd(request()->all());
 
         $attributes = $request->input();
+
+
 
 
         $league->update($attributes);

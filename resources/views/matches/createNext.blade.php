@@ -44,9 +44,9 @@
                 <div class="grid grid-cols-2 space-x-4">
 
                     <div>
-                        <x-form.input-label for="date" :value="__('Select Match date')" />
-                        <x-form.date-input id="date" name="date" type="text" class="mt-1 block w-full" :value="old('date')" required autofocus autocomplete="date" />
-                        <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
+                        <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
+                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full" :value="old('dateOnly')" required autofocus autocomplete="dateOnly" />
+                        <x-form.input-error class="mt-2" :messages="$errors->get('dateOnly')" />
                     </div>
 
                     <div>

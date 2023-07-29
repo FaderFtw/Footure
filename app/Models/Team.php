@@ -28,12 +28,12 @@ class Team extends Model
 
     public function homeMatches(): hasMany
     {
-        return $this->hasMany(Matche::class, 'team_id_home')->orderByRaw('date ASC, time ASC');
+        return $this->hasMany(Matche::class, 'team_id_home')->orderByRaw('date ASC');
     }
 
     public function awayMatches(): hasMany
     {
-        return $this->hasMany(Matche::class, 'team_id_away')->orderByRaw('date ASC, time ASC');
+        return $this->hasMany(Matche::class, 'team_id_away')->orderByRaw('date ASC');
     }
 
     public function averageAge(): int

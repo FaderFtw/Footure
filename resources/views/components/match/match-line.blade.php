@@ -11,17 +11,17 @@
             </a>
         @else
             <div class="flex justify-center ">
-                @if(strtotime($match->date) === strtotime(date('Y-m-d')))
+                @if(date('Y/m/d', strtotime($match->date)) === date('Y/m/d'))
                     <p class="text-sm font-bold self-center">Today</p>
                 @else
-                    <time class="font-bold self-center">{{str_replace('-', '/', $match->date)}}</time>
+                    <time class="font-bold self-center">{{date('Y/m/d', strtotime($match->date))}}</time>
                 @endif
             </div>
         @endif
 
 
         <div class="flex justify-around  self-center font-bold">
-            <time class="border-gray-400 ">{{ date('H:i', strtotime($match->time)) }}</time>
+            <time class="border-gray-400 ">{{ date('H:i', strtotime($match->date)) }}</time>
         </div>
     </div>
 

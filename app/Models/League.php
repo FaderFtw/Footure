@@ -25,6 +25,6 @@ class League extends Model
     public function matches (): HasMany
     {
         //hasOne, hasMany, belongsTo, belongToMany
-        return $this->hasMany(Matche::class)->with(['score'])->orderByRaw('date ASC, time ASC');
+        return $this->hasMany(Matche::class)->with(['score'])->orderByRaw('date ASC');
     }
 }

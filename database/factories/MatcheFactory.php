@@ -21,13 +21,11 @@ class MatcheFactory extends Factory
     public function definition(): array
     {
         $date = fake() ->dateTime;
-        $time = fake() ->time;
         $today = new DateTime();
 
 
         if($date <= $today)
-            if ($time <= $today->format('H:i:s'))
-                $score = Score::factory();
+            $score = Score::factory();
         else
             $score = null;
 
@@ -35,7 +33,6 @@ class MatcheFactory extends Factory
 
         return [
             'date' => $date,
-            'time' =>  $time,
             'stadium' => fake() ->name,
             'desc' => fake() ->paragraph,
             'referee' => fake() ->name,

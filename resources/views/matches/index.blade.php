@@ -41,7 +41,7 @@
                     @if(strtotime($matches[0]->date) === strtotime(date('Y-m-d')))
                         <p class="text-3xl font-bold self-center">Today</p>
                     @else
-                        <time class="text-3xl font-bold self-center">{{$matches[0]->date}}</time>
+                        <time class="text-3xl font-bold self-center">{{date('Y-m-d', strtotime($matches[0]->date))}}</time>
                     @endif
 
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
 class StoreMatchRequest extends FormRequest
@@ -14,17 +15,18 @@ class StoreMatchRequest extends FormRequest
      */
     public function rules(): array
     {
-        $data=[
-            'league_id' => ['required', Rule::exists('leagues', 'id')],
-            'team_id_home' => ['required','different:team_id_away', Rule::exists('teams', 'id')],
-            'team_id_away' => ['required','different:team_id_home', Rule::exists('teams', 'id')],
+        $combinedDateTime = request()->input('date') . ' ' . request()->input('time');
+
+        return [
+            'league_id' => ['required', 'exists:leagues,id'],
+            'team_id_home' => ['required', 'different:team_id_away', 'exists:teams,id'],
+            'team_id_away' => ['required', 'exists:teams,id'],
             'date' => ['required', 'date'],
             'time' => ['required'],
-            'desc' => ['string','nullable'],
-            'stadium' => ['string',],
-            'referee' => ['required','string']
+            'combined_date_time' => ['required', new AfterOrEqualCombinedDateTime($combinedDateTime)],
+            'desc' => ['string', 'nullable'],
+            'stadium' => ['string'],
+            'referee' => ['required', 'string'],
         ];
-
-        return $data;
     }
 }

@@ -68,7 +68,7 @@ class MactheController extends Controller
 
     public function matchesByDate(Request $request, $date)
     {
-        $matches = Matche::whereDate('date', $date)->with('league', 'homeTeam', 'awayTeam', 'score')->orderBy('time')->get();
+        $matches = Matche::whereDate('date', $date)->with('league', 'homeTeam', 'awayTeam', 'score')->orderBy('date')->get();
         return view('matches.index', ['matches' => $matches]);
     }
 }

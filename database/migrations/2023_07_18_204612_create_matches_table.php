@@ -14,8 +14,7 @@ return new class extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('time');
+            $table->dateTime('date');
             $table->string('stadium');
             $table->text('desc');
             $table->string('referee');

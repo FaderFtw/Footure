@@ -13,17 +13,16 @@
         <x-panel class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-4">Create new match</h2>
 
-            <form method="post" action="{{ route('match.createNext') }}" class="mt-6 space-y-6">
+            <form method="get" action="{{ route('match.createNext') }}" class="mt-6 space-y-6">
                 @csrf
 
                 <div>
-                    <div class="flex space-x-2 ml-2 ml-2">
+                    <div class="flex space-x-2 ml-2">
                         <i class="fas fa-solid fa-trophy"></i> <x-form.input-label for="league_id" :value="__('League')" />
                     </div>
                     <x-form.select-league id="league_id" name="league_id"  class="block"  :leagues="\App\Models\League::orderBy('name')->get()" :team="old('league_id')" required autofocus autocomplete="league_id"/>
                     <x-form.input-error class="mt-2" :messages="$errors->get('league_id')" />
                 </div>
-
 
                 <x-primary-button class="p-6">{{ __('Next') }}</x-primary-button>
 

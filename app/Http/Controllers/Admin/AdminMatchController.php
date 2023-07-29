@@ -28,14 +28,15 @@ class AdminMatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(StoreMatchRequest $request)
     {
-        dd(request()->all());
         $attributes = $request->input();
-
-        $originalDate = $attributes['founded_at'];
+        dd($attributes['time']);
+        $originalDate = $attributes['date'].$attributes['date'];
         $dateObj = DateTime::createFromFormat('m/d/Y', $originalDate);
         $date= $dateObj->format('Y-m-d');
+
+        $attributes['date']= $date;
 
 
         Matche::create($attributes);

@@ -164,8 +164,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'team_id_home' => [
+            'different' => 'The teams must be different',
+            'required' => 'The home team is required',
+        ],
+        'team_id_away' => [
+            'required' => 'The away team is required',
+        ],
+        'league_id' => [
+            'required' => 'The League is required',
         ],
     ],
 

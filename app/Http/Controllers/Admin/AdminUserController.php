@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreLeagueRequest;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateLeagueRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\League;
 use App\Models\User;
+use Laravolt\Avatar\Facade as Avatar;
 use Nette\Utils\DateTime;
 
 class AdminUserController extends Controller
@@ -26,19 +26,27 @@ class AdminUserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $attributes = $request->input();
+        unset($attributes['password_confirmation']);
+        if ($request->role == User::PLAYER){
+            $atkRate = $request->atkRate;
+            $midRate = $request->midRate;
+            $defRate = $request->defRate;
+            $rating = intval(($atkRate + $midRate + $defRate) / 3);
+            $attributes['rating'] = $rating;
+        }
 
-
-        User::create($attributes);
-        return redirect('/admin_dashboard/leagues')->with('success','New User has been created.');
+        $user = User::create($attributes);
+        Avatar::create($request->name)->save(public_path('avatars/avatar-'. $user->id .'.png'));
+        return redirect('/admin_dashboard/users')->with('success','New User has been created.');
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(League $league)
+    public function edit(User $user)
     {
-        return view('leagues.edit', ['league' => $league]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -46,21 +54,10 @@ class AdminUserController extends Controller
      */
     public function update(UpdateLeagueRequest $request, League $league)
     {
+        dd(request()->all());
 
         $attributes = $request->input();
 
-        if($attributes['founded_at'] ?? false){
-            $attributes['founded_at'] = DateTime::createFromFormat('m/d/Y', $attributes['founded_at'])
-                ->format('Y-m-d');
-        }
-
-
-        if($attributes['name'] ?? false)
-            $attributes['slug'] = str_replace(' ', '-', $attributes['name']);
-
-
-        if($request->file('logo') ?? false)
-            $attributes['logo'] = $request->file('logo')->store('leagues-logos');
 
         $league->update($attributes);
 

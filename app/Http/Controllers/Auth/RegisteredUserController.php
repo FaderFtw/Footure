@@ -46,7 +46,6 @@ class RegisteredUserController extends Controller
 
         Avatar::create($request->name)->save(public_path('avatars/avatar-'. $user->id .'.png'));
 
-
         event(new Registered($user));
 
         Auth::login($user);

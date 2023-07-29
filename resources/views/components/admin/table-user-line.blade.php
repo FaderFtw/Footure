@@ -10,7 +10,7 @@
         @if($user->role === \App\Models\User::PLAYER)
             <a href="{{route('player', ['user' => $user])}}">
                 <div class="flex justify-center">
-                    <img id="showImage" class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. auth()->id() .'.png')  }}" alt="Profile Image">
+                    <img id="showImage" class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
                 </div>
             </a>
         @else
@@ -54,7 +54,7 @@
     @if($user->role !== \App\Models\User::ADMIN)
 
         <td class="px-6 py-4">
-            <a href="   " class=" text-blue-600 dark:text-blue-500 font-bold hover:bg-gray-300 hover:text-white rounded-lg p-2">Edit</a>
+            <a href="{{route('user.edit', ['user' => $user])}}" class=" text-blue-600 dark:text-blue-500 font-bold hover:bg-gray-300 hover:text-white rounded-lg p-2">Edit</a>
         </td>
 
         <td class="px-6 py-4">

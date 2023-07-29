@@ -45,13 +45,13 @@
 
                     <div>
                         <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
-                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full" :value="old('dateOnly')" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
+                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full"  required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
                     </div>
 
                     <div>
                         <x-form.input-label for="time" :value="__('Match Time')" />
-                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time')" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
+                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
                     </div>
 

@@ -2,28 +2,20 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Carbon;
 
-class AfterOrEqualCombinedDateTime implements Rule
+class AfterOrEqualCombinedDateTime implements ValidationRule
 {
-    protected $combinedDateTime;
 
-    public function __construct($combinedDateTime)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $this->combinedDateTime = $combinedDateTime;
-    }
+        $inputDateTime = Carbon::createFromFormat('m/d/Y H:i', $value);
+        $currentDateTime = Carbon::now()->format('m/d/Y H:i');
 
-    public function passes($attribute, $value)
-    {
-        $inputDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->combinedDateTime);
-        $currentDateTime = Carbon::now();
-
-        return $inputDateTime->gte($currentDateTime);
-    }
-
-    public function message()
-    {
-        return 'The :attribute must be after or equal to the current date and time.';
+        if ($inputDateTime->lt($currentDateTime)) {
+            $fail("The {$attribute} must be after or equal to the current date and time.");
+        }
     }
 }

@@ -30,16 +30,16 @@ class AdminMatchController extends Controller
      */
     public function store(StoreMatchRequest $request)
     {
-        $attributes = $request->input();
-        dd($attributes['time']);
-        $originalDate = $attributes['date'].$attributes['date'];
-        $dateObj = DateTime::createFromFormat('m/d/Y', $originalDate);
-        $date= $dateObj->format('Y-m-d');
+        $attributes = $request->validated();
+        unset($attributes['dateOnly']);
+        unset($attributes['time']);
+
+        $date= date('Y-m-d H:i', strtotime($attributes['date']));
 
         $attributes['date']= $date;
 
-
         Matche::create($attributes);
+
         return redirect('/admin_dashboard/matches')->with('success','New Match has been created.');
 
     }

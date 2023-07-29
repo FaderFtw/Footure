@@ -45,15 +45,18 @@
 
                     <div>
                         <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
-                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full" :value="old('dateOnly')" required autofocus autocomplete="dateOnly" />
-                        <x-form.input-error class="mt-2" :messages="$errors->get('dateOnly')" />
+                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full" :value="old('dateOnly')" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
+                        <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
                     </div>
 
                     <div>
                         <x-form.input-label for="time" :value="__('Match Time')" />
-                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time')" required autofocus autocomplete="time" />
+                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time')" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
                     </div>
+
+                    <input type="hidden" id="date" name="date" value="">
+
 
                 </div>
 
@@ -86,8 +89,22 @@
                     <x-primary-button class="p-6" >{{ __('Create') }}</x-primary-button>
                 </div>
 
+            <script>
+                function updateHiddenInput() {
+                    const dateInput = document.getElementById('dateOnly');
+                    const timeInput = document.getElementById('time');
+                    const hiddenInput = document.getElementById('date');
+
+                    const dateValue = dateInput.value;
+                    const timeValue = timeInput.value;
+
+                    // Set the value of the hidden input to the combined date and time
+                    hiddenInput.value = `${dateValue} ${timeValue}`;
+                }
+            </script>
 
             </form>
+
 
         </x-panel>
     </main>

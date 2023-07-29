@@ -21,6 +21,7 @@ class StoreUserRequest extends FormRequest
             'username' => ['required', 'max:255' , 'min:3',Rule::unique('users','username')],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users','email')],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'country' => ['string'],
             'age' => ['required', 'integer'],
             'role' => ['required', 'integer', Rule::in([User::ADMIN,User::USER,User::PLAYER])]
         ];
@@ -28,12 +29,14 @@ class StoreUserRequest extends FormRequest
         $role = $this->request->get('role');
         if ($role == User::PLAYER){
             $data = $data + [
+                    'team_id' => [Rule::exists('teams','id')],
                     'position' => ['string'],
-                    'atkRate' => ['required','integer',  'max:100' , 'min:5'],
-                    'midRate' => ['required','integer',  'max:100' , 'min:5'],
-                    'defRate' => ['required','integer',  'max:100' , 'min:5'],
+                    'atkRate' => ['integer',  'max:100' , 'min:5'],
+                    'midRate' => ['integer',  'max:100' , 'min:5'],
+                    'defRate' => ['integer',  'max:100' , 'min:5'],
                 ];
         }
+
         return $data;
     }
 }

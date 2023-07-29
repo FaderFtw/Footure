@@ -15,7 +15,7 @@
             </a>
         @else
             <div class="flex justify-center">
-                <img id="showImage" class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. auth()->id() .'.png')  }}" alt="Profile Image">
+                <img  class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
             </div>
         @endif
     </th>

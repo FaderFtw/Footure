@@ -16,7 +16,7 @@
                 <h2 class="text-3xl font-bold self-center">Create new user</h2>
             </div>
 
-            <form method="POST" class="mt-6 space-y-6" action="{{ route('user.create') }}">
+            <form method="post" action="{{ route('user.store') }}" class="mt-6 space-y-6" >
                 @csrf
 
                 <div class="grid grid-cols-2 space-x-4">
@@ -86,9 +86,11 @@
                     <x-form.input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
+
+
                 <!-- Player Status -->
                 <div>
-                    <x-form.input-label for="role" :value="__('Player Status')"/>
+                    <x-form.input-label for="role" :value="__('User Type')"/>
                     <x-form.select-input id="role" class="block mt-1 w-full" name="role" required onchange="togglePlayerFields(this)">
                         <option value="{{\App\Models\User::ADMIN}}">Admin</option>
                         <option value="{{\App\Models\User::USER}}">User</option>
@@ -98,11 +100,20 @@
                 </div>
 
                 <!-- Player Fields -->
-                <div id="player_fields" style="display: none;">
+                <div id="player_fields" class="space-y-4" style="display: none;">
+
+                    <div class="flex-col self-center">
+                        <x-form.input-label for="team_id" :value="__('Team')" />
+                        <x-form.select-homeTeam id="team_id" name="team_id"  class="block"  :teams="\App\Models\Team::orderBy('name')->get()" :oldTeam="null" required  autocomplete="team_id"/>
+                        <x-form.input-error class="mt-2" :messages="$errors->get('team_id')" />
+                    </div>
+
+
                     <!-- Position -->
                     <div>
                         <x-form.input-label for="position" :value="__('Position')" />
                         <x-form.select-input id="position" class="block mt-1 w-full" name="position">
+                            <option value="" selected>Select Position</option>
                             <option value="Striker">Striker</option>
                             <option value="Midfielder">Midfielder</option>
                             <option value="Defender">Defender</option>
@@ -114,21 +125,21 @@
                         <!-- Attack Rate -->
                         <div>
                             <x-form.input-label for="atkRate" :value="__('Attack Rate')" />
-                            <x-form.text-input id="atkRate" class="block mt-1 w-full" type="number" name="atkRate" :value="old('atkRate')" />
+                            <x-form.text-input id="atkRate" class="block mt-1 w-full" type="number" name="atkRate"  />
                             <x-form.input-error :messages="$errors->get('atkRate')" class="mt-2" />
                         </div>
 
                         <!-- Midfield Rate -->
                         <div>
                             <x-form.input-label for="midRate" :value="__('Midfield Rate')" />
-                            <x-form.text-input id="midRate" class="block mt-1 w-full" type="number" name="midRate" :value="old('midRate')" />
+                            <x-form.text-input id="midRate" class="block mt-1 w-full" type="number" name="midRate"  />
                             <x-form.input-error :messages="$errors->get('midRate')" class="mt-2" />
                         </div>
 
                         <!-- Defense Rate -->
                         <div>
                             <x-form.input-label for="defRate" :value="__('Defense Rate')" />
-                            <x-form.text-input id="defRate" class="block mt-1 w-full" type="number" name="defRate" :value="old('defRate')" />
+                            <x-form.text-input id="defRate" class="block mt-1 w-full" type="number" name="defRate"/>
                             <x-form.input-error :messages="$errors->get('defRate')" class="mt-2" />
                         </div>
                     </div>
@@ -141,17 +152,20 @@
                         playerFields.style.display = select.value === '2' ? 'block' : 'none';
 
                         // Set required attribute based on player status
+                        var teamField = document.getElementById('team_id');
                         var atkRateField = document.getElementById('atkRate');
                         var midRateField = document.getElementById('midRate');
                         var defRateField = document.getElementById('defRate');
                         var positionField = document.getElementById('position');
 
                         if (select.value === '2') {
+                            teamField.required = true;
                             atkRateField.required = true;
                             midRateField.required = true;
                             defRateField.required = true;
                             positionField.required = true;
                         } else {
+                            teamField.required = false;
                             atkRateField.required = false;
                             midRateField.required = false;
                             defRateField.required = false;

@@ -171,6 +171,9 @@ return [
         'team_id_away' => [
             'required' => 'The away team is required',
         ],
+        'team_id' => [
+            'required' => 'The team is required',
+        ],
         'league_id' => [
             'required' => 'The League is required',
         ],

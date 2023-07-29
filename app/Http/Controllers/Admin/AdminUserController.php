@@ -28,8 +28,6 @@ class AdminUserController extends Controller
         $attributes = $request->input();
 
 
-
-
         User::create($attributes);
         return redirect('/admin_dashboard/leagues')->with('success','New User has been created.');
 

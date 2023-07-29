@@ -144,7 +144,7 @@
         if (option) {
             const value = option.classList[1];
             const label = option.querySelector('p').textContent;
-            const selectElement = document.getElementById('team_id_away');
+            const selectElement = document.getElementById('{{$id}}');
             selectElement.value = value;
             document.querySelector('.default_optionAwayTeam li p').textContent = label;
             toggleDropdown();

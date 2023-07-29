@@ -32,21 +32,15 @@ class RegisteredUserController extends Controller
     {
         $attributes = $request->input();
 
-        $atkRate = $midRate = $defRate = $position  = $rating= null;
 
         if ($request->role == User::PLAYER){
-            $position = $request->position;
             $atkRate = $request->atkRate;
             $midRate = $request->midRate;
             $defRate = $request->defRate;
             $rating = intval(($atkRate + $midRate + $defRate) / 3);
+            $attributes['rating'] = $rating;
         }
-
-        $attributes['position'] = $position;
-        $attributes['atkRate'] = $atkRate;
-        $attributes['midRate'] = $midRate;
-        $attributes['defRate'] = $defRate;
-
+        unset($attributes['password_confirmation']);
 
         $user = User::create($attributes);
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('age');
-            $table->string('country');
+            $table->string('country')->nullable();
             $table->string('image')->nullable();
             $table->integer('role');
             $table->enum('position', ['Striker', 'Midfielder ', 'Defender'])->nullable();

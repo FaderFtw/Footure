@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AfterOrEqualCombinedDateTime;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,13 +16,17 @@ class UpdateMatchRequest extends FormRequest
 
     public function rules(): array
     {
+
         $data=[
-            'name' => ['required', 'string', 'max:255', Rule::unique('leagues','name')->ignore($this->league)],
-            'country' => ['required', 'string'],
+            'league_id' => ['required', Rule::exists('leagues', 'id')],
+            'team_id_home' => ['required','different:team_id_away', Rule::exists('teams', 'id')],
+            'team_id_away' => ['required', Rule::exists('teams', 'id')],
+            'dateOnly' => ['required', 'date', 'exclude'],
+            'time' => ['required', 'exclude'],
+            'date' => ['required', new AfterOrEqualCombinedDateTime()],
             'desc' => ['string','nullable'],
-            'founder' => ['required'],
-            'founded_at' => ['nullable', 'date'],
-            'logo' => ['image', 'mimes:jpg,bmp,png', 'dimensions:min_width=200,min_height=300']
+            'stadium' => ['string','nullable'],
+            'referee' => ['required','string']
         ];
 
         return $data;

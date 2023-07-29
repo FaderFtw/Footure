@@ -11,7 +11,7 @@
             <x-admin.manage-card :href="route('admin.leagues')" image="leagueLogo.svg">MANAGE LEAGUES</x-admin.manage-card>
             <x-admin.manage-card :href="route('admin.teams')" image="teamLogo.png">MANAGE TEAMS</x-admin.manage-card>
             <x-admin.manage-card :href="route('admin.matches')" image="matchesLogo.svg">MANAGE MATCHES</x-admin.manage-card>
-            <x-admin.manage-card :href="route('admin.leagues')" image="playersLogo.svg">MANAGE USERS</x-admin.manage-card>
+            <x-admin.manage-card :href="route('admin.users')" image="playersLogo.svg">MANAGE USERS</x-admin.manage-card>
         </div>
 
 

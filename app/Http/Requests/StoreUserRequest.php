@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
         $role = $this->request->get('role');
         if ($role == User::PLAYER){
             $data = $data + [
-                    'position' => [ 'string'],
+                    'position' => ['string'],
                     'atkRate' => ['required','integer',  'max:100' , 'min:5'],
                     'midRate' => ['required','integer',  'max:100' , 'min:5'],
                     'defRate' => ['required','integer',  'max:100' , 'min:5'],

@@ -83,18 +83,36 @@
 </style>
 
 <select {{$attributes->merge(['class' => 'hidden'])}} >
-    <option disabled selected>Select a team</option>
-    @foreach($teams as $team)
-        <option value="{{$team->id}}">{{ $team->name }}</option>
-    @endforeach
+    @if($oldTeam)
+        <option disabled >Select a team</option>
+        @foreach($teams as $team)
+            <option value="{{$team->id}}" {{$oldTeam->id === $team->id ? 'selected' : ''}}>{{ $team->name }}</option>
+        @endforeach
+    @else
+        <option disabled selected>Select a team</option>
+        @foreach($teams as $team)
+            <option value="{{$team->id}}">{{ $team->name }}</option>
+        @endforeach
+    @endif
+
 </select>
 
 <div class="select_wrapHomeTeam border-2 border-gray-200 rounded-lg ">
     <ul class="default_optionHomeTeam">
-        <li>
-            <div class="iconHomeTeam"></div>
-            <p>Select team</p>
-        </li>
+        @if($oldTeam)
+            <li>
+                <div class="option {{$oldTeam->id}}">
+                    <div class="iconHomeTeam justify-center flex items-center"><img width="50" height="50" src="{{asset($oldTeam->logo)}}" alt="Home Team image"></div>
+                    <p>{{ucwords($oldTeam->name)}}</p>
+                </div>
+            </li>
+        @else
+            <li>
+                <div class="iconHomeTeam"></div>
+                <p>Select team</p>
+            </li>
+        @endif
+
     </ul>
     <ul class="select_ulHomeTeam overflow-y-scroll max-h-52">
         <li>

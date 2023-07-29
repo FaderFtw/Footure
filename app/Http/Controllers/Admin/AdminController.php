@@ -25,5 +25,9 @@ class AdminController extends Controller
     {
         return view('admin.manage-matches');
     }
+    public function users()
+    {
+        return view('admin.manage-users');
+    }
 
 }

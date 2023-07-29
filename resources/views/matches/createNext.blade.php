@@ -27,7 +27,7 @@
 
                         <div class="flex-col self-center">
                             <x-form.input-label for="team_id_home" :value="__('Home Team')" class="ml-2"/>
-                            <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$league->teamsOrderedByName"  required  autocomplete="team_id_home"/>
+                            <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$league->teamsOrderedByName" :oldTeam="null" required  autocomplete="team_id_home"/>
                             <x-form.input-error class="mt-2" :messages="$errors->get('team_id_home')" />
                         </div>
 
@@ -37,7 +37,7 @@
 
                         <div class="flex-col self-center">
                             <x-form.input-label for="team_id_away" :value="__('Away Team')" class="ml-2"/>
-                            <x-form.select-awayTeam id="team_id_away" name="team_id_away"  class="block"  :teams="$league->teamsOrderedByName"  required  autocomplete="team_id_away"/>
+                            <x-form.select-awayTeam id="team_id_away" name="team_id_away"  class="block"  :teams="$league->teamsOrderedByName" :oldTeam="null" required  autocomplete="team_id_away"/>
                             <x-form.input-error class="mt-2" :messages="$errors->get('team_id_away')" />
                         </div>
                     </div>
@@ -46,17 +46,17 @@
 
                         <div>
                             <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
-                            <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full"  required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
+                            <x-form.text-input id="dateOnly" name="dateOnly" type="date" class="mt-1 block w-full" :value="old('dateOnly')"  required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
                             <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
                         </div>
 
                         <div>
                             <x-form.input-label for="time" :value="__('Match Time')" />
-                            <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
+                            <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time')" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
                             <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
                         </div>
 
-                        <input type="hidden" id="date" name="date" value="">
+                        <input type="hidden" id="date" name="date" value="{{old('date')}}">
 
 
                     </div>
@@ -92,12 +92,15 @@
 
                 <script>
                     function updateHiddenInput() {
+                        console.log('entered');
                         const dateInput = document.getElementById('dateOnly');
                         const timeInput = document.getElementById('time');
                         const hiddenInput = document.getElementById('date');
 
                         const dateValue = dateInput.value;
                         const timeValue = timeInput.value;
+
+
 
                         // Set the value of the hidden input to the combined date and time
                         hiddenInput.value = `${dateValue} ${timeValue}`;

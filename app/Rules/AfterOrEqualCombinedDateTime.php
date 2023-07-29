@@ -11,8 +11,8 @@ class AfterOrEqualCombinedDateTime implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $inputDateTime = Carbon::createFromFormat('m/d/Y H:i', $value);
-        $currentDateTime = Carbon::now()->format('m/d/Y H:i');
+        $inputDateTime = Carbon::createFromFormat('Y-m-d H:i', $value);
+        $currentDateTime = Carbon::now()->format('Y-m-d H:i');
 
         if ($inputDateTime->lt($currentDateTime)) {
             $fail("The {$attribute} must be after or equal to the current date and time.");

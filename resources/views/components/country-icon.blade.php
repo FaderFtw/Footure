@@ -1,7 +1,7 @@
-@props(['width','height','country'])
+@props(['width','height','country', 'hidden' => false])
 <div {{$attributes->merge(['class' => 'flex'])}}>
     <div class="{{$country}}" style="width: {{$width}}px; height: {{$height}}px;"></div>
-    <span id="con" class="ml-3 self-center">{{$country}}</span>
+    <span id="con" class="ml-3 self-center {{$hidden ? 'hidden' : ''}}">{{$country}}</span>
 </div>
 
 <script>

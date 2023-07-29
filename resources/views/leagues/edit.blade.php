@@ -21,7 +21,7 @@
                 @method('PATCH')
 
                 <div>
-                    <x-form.input-label for="name" :value="__('League Name')" />
+                        <x-form.input-label for="name" :value="__('League Name')" />
                     <x-form.text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $league->name)" required autofocus autocomplete="name" />
                     <x-form.input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>

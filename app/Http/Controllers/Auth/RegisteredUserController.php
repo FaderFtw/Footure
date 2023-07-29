@@ -30,6 +30,8 @@ class RegisteredUserController extends Controller
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
+        $attributes = $request->input();
+
         $atkRate = $midRate = $defRate = $position  = $rating= null;
 
         if ($request->role == User::PLAYER){
@@ -40,20 +42,13 @@ class RegisteredUserController extends Controller
             $rating = intval(($atkRate + $midRate + $defRate) / 3);
         }
 
+        $attributes['position'] = $position;
+        $attributes['atkRate'] = $atkRate;
+        $attributes['midRate'] = $midRate;
+        $attributes['defRate'] = $defRate;
 
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'age' => $request->age,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request-> role,
-            'position' => $position,
-            'rating' => $rating,
-            'atkRate' => $atkRate,
-            'midRate' => $midRate,
-            'defRate' => $defRate,
-        ]);
+
+        $user = User::create($attributes);
 
         Avatar::create($request->name)->save(public_path('avatars/avatar-'. $user->id .'.png'));
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminLeagueController;
 use App\Http\Controllers\Admin\AdminTeamController;
 use App\Http\Controllers\Admin\AdminMatchController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\MactheController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/admin_dashboard/leagues', [AdminController::class, 'leagues'])->name('admin.leagues');
     Route::get('/admin_dashboard/teams', [AdminController::class, 'teams'])->name('admin.teams');
     Route::get('/admin_dashboard/matches', [AdminController::class, 'matches'])->name('admin.matches');
+    Route::get('/admin_dashboard/users', [AdminController::class, 'users'])->name('admin.users');
 
     /*League Management*/
     Route::get('/admin_dashboard/leagues/create', [AdminLeagueController::class, 'create'])->name('league.create');
@@ -55,6 +57,14 @@ Route::group(['middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/admin_dashboard/matches/edit/{matche}', [AdminMatchController::class, 'edit'])->name('match.edit');
     Route::patch('/admin_dashboard/matches/{matche}', [AdminMatchController::class, 'update'])->name('match.update');
     Route::delete('/admin_dashboard/matches/{matche}', [AdminMatchController::class, 'destroy'])->name('match-destroy');
+
+
+    /*User Management*/
+    Route::get('/admin_dashboard/users/create', [AdminUserController::class, 'create'])->name('user.create');
+    Route::post('/admin_dashboard/users', [AdminUserController::class, 'store'])->name('user.store');
+    Route::get('/admin_dashboard/users/{user:username}/edit', [AdminUserController::class, 'edit'])->name('user.edit');
+    Route::patch('/admin_dashboard/users/{user:username}', [AdminUserController::class, 'update'])->name('user.update');
+    Route::delete('/admin_dashboard/users/{user:username}', [AdminUserController::class, 'destroy'])->name('user-destroy');
 
 });
 

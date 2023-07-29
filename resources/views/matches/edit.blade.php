@@ -28,7 +28,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_home" :value="__('Home Team')" class="ml-2"/>
-                        <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :team="$match->homeTeam" required autofocus autocomplete="team_id_home"/>
+                        <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :oldTeam="$match->homeTeam" required autofocus autocomplete="team_id_home"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_home')" />
                     </div>
 
@@ -38,7 +38,7 @@
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_away" :value="__('Away Team')" class="ml-2"/>
-                        <x-form.select-awayTeam id="team_id_away" name="team_id_away"  class="block"  :teams="$match->league->teamsOrderedByName"  :team="$match->awayTeam" :team="old('team_id_away')" required autofocus autocomplete="team_id_away"/>
+                        <x-form.select-awayTeam id="team_id_away" name="team_id_away"  class="block"  :teams="$match->league->teamsOrderedByName"  :oldTeam="$match->awayTeam" :team="old('team_id_away')" required autofocus autocomplete="team_id_away"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_away')" />
                     </div>
                 </div>
@@ -47,24 +47,25 @@
 
                     <div>
                         <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
-                        <x-form.date-input id="dateOnly" name="dateOnly" type="text" class="mt-1 block w-full" :value="date('m/d/Y', strtotime($match->date))" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
+                        <x-form.text-input id="dateOnly" name="dateOnly" type="date" class="mt-1 block w-full" :value="old('dateOnly',date('Y-m-d', strtotime($match->date)))" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
                     </div>
 
                     <div>
                         <x-form.input-label for="time" :value="__('Match Time')" />
-                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="date('H:i', strtotime($match->date))" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
+                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time',date('H:i', strtotime($match->date)))" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
                     </div>
 
-                    <input type="hidden" id="date" name="date" value="">
+
+                    <input type="hidden" id="date" name="date" value="{{old('date',date('Y-m-d H:i', strtotime($match->date)))}}">
 
 
                 </div>
 
                 <div>
                     <x-form.input-label for="desc" :value="__('Description')" />
-                    <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc">{{$match->desc}}</x-form.text-area>
+                    <x-form.text-area id="desc" name="desc" class="mt-1 block w-full" required autofocus autocomplete="desc">{{old('desc',$match->desc)}}</x-form.text-area>
                     <x-form.input-error class="mt-2" :messages="$errors->get('desc')" />
                 </div>
 

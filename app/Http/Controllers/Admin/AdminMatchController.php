@@ -36,8 +36,6 @@ class AdminMatchController extends Controller
         unset($attributes['dateOnly']);
         unset($attributes['time']);
 
-        $date= date('Y-m-d H:i', strtotime($attributes['date']));
-        $attributes['date']= $date;
 
         if (!$attributes['stadium'])
             $attributes['stadium'] = Team::find($attributes['team_id_home'])->stadium;
@@ -62,6 +60,14 @@ class AdminMatchController extends Controller
     public function update(UpdateMatchRequest $request,Matche $matche)
     {
         $attributes = $request->input();
+        unset($attributes['dateOnly']);
+        unset($attributes['time']);
+
+
+        if($attributes['stadium'] ?? false)
+            if (!$attributes['stadium'])
+                $attributes['stadium'] = Team::find($attributes['team_id_home'])->stadium;
+
 
         $matche->update($attributes);
 

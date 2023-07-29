@@ -10,12 +10,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class League extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
 
     public function teams(): HasMany
     {
         return $this->hasMany(Team::class)->orderBy('league_points', 'desc');
+    }
+
+    public function teamsOrderedByName(): HasMany
+    {
+        return $this->hasMany(Team::class)->orderBy('name');
     }
 
     public function matches (): HasMany

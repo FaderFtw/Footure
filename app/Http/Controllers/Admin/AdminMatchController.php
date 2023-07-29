@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMatchRequest;
+use App\Http\Requests\UpdateMatchRequest;
+use App\Models\League;
 use App\Models\Matche;
+use DateTime;
 
 class AdminMatchController extends Controller
 {
@@ -15,24 +19,27 @@ class AdminMatchController extends Controller
         return view('matches.create');
     }
 
+    public function createNext()
+    {
+        request()->validate(['league_id' => 'required']);
+        return view('matches.createNext', ['league' =>League::with(['teams'])->find(request()->input('league_id'))]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store()
     {
+        dd(request()->all());
         $attributes = $request->input();
 
         $originalDate = $attributes['founded_at'];
         $dateObj = DateTime::createFromFormat('m/d/Y', $originalDate);
         $date= $dateObj->format('Y-m-d');
 
-        $attributes['slug'] = str_replace(' ', '-', $attributes['name']);
-        $attributes['founded_at'] = $date;
-        $attributes['logo'] = $request->file('logo')->store('matches-logos');
-
 
         Matche::create($attributes);
-        return redirect('/admin_dashboard/matches')->with('success','New Matche has been created.');
+        return redirect('/admin_dashboard/matches')->with('success','New Match has been created.');
 
     }
 

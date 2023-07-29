@@ -3,28 +3,30 @@
     $selectBarId = 'select_bar_' . uniqid();
 @endphp
 
+
+
 <style>
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}}{
-        z-index: 6;
+    .select_wrap{{$selectBarId}}{
+        z-index: 7;
         margin: 3px;
         width: 100%;
         position: relative;
         user-select: none;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .default_optionTeam{{$selectBarId}}{
+    .select_wrap{{$selectBarId}} .default_option{{$selectBarId}}{
         background: #fff;
         border-radius: 5px;
         position: relative;
         cursor: pointer;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .default_optionTeam{{$selectBarId}} li{
+    .select_wrap{{$selectBarId}} .default_option{{$selectBarId}} li{
         padding: 8px 20px;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .default_optionTeam{{$selectBarId}}:before{
+    .select_wrap{{$selectBarId}} .default_option{{$selectBarId}}:before{
         content: "";
         position: absolute;
         top: 18px;
@@ -36,7 +38,7 @@
         transform: rotate(-45deg);
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .select_ulTeam{{$selectBarId}}{
+    .select_wrap{{$selectBarId}} .select_ul{{$selectBarId}}{
         position: absolute;
         top: 55px;
         left: 0;
@@ -46,70 +48,71 @@
         display: none;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .select_ulTeam{{$selectBarId}} li{
+    .select_wrap{{$selectBarId}} .select_ul{{$selectBarId}} li{
         padding: 8px 20px;
         cursor: pointer;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .select_ulTeam{{$selectBarId}} li:first-child:hover{
+    .select_wrap{{$selectBarId}} .select_ul{{$selectBarId}} li:first-child:hover{
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .select_ulTeam{{$selectBarId}} li:last-child:hover{
+    .select_wrap{{$selectBarId}} .select_ul{{$selectBarId}} li:last-child:hover{
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .select_ulTeam{{$selectBarId}} li:hover{
+    .select_wrap{{$selectBarId}} .select_ul{{$selectBarId}} li:hover{
         background-color: lightblue;
         color: #FFFFFF;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .option{
+    .select_wrap{{$selectBarId}} .option{
         display: flex;
         align-items: center;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}} .option .iconTeam{{$selectBarId}}{
+    .select_wrap{{$selectBarId}} .option .icon{
         width: 32px;
         height: 32px;
         margin-right: 15px;
     }
 
-
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}}.active .select_ulTeam{{$selectBarId}}{
+    .select_wrap{{$selectBarId}}.active .select_ul{{$selectBarId}}{
         display: block;
     }
 
-    .select_ulTeam{{$selectBarId}}{{$selectBarId}}.active .default_optionTeam{{$selectBarId}}:before{
+    .select_wrap{{$selectBarId}}.active .default_option{{$selectBarId}}:before{
         top: 25px;
         transform: rotate(-225deg);
     }
 </style>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-
-<select {{$attributes->merge(['class' => 'hidden'])}} >
+<select {{$attributes->merge(['class' => 'hidden'])}} onchange="toggleOtherFields(this)">
     <option disabled selected>Select a team</option>
     @foreach($teams as $team)
         <option value="{{$team->id}}">{{ $team->name }}</option>
     @endforeach
 </select>
 
-
-<div class="select_ulTeam{{$selectBarId}}{{$selectBarId}} border-2 border-gray-200 rounded-lg">
-    <ul class="default_optionTeam{{$selectBarId}}">
+<div class="select_wrap{{$selectBarId}} border-2 border-gray-200 rounded-lg ">
+    <ul class="default_option{{$selectBarId}}">
         <li>
-            <div class="iconTeam{{$selectBarId}}"></div>
+            <div class="icon"></div>
             <p>Select team</p>
         </li>
     </ul>
-    <ul class="select_ulTeam{{$selectBarId}} overflow-y-scroll max-h-52">
+    <ul class="select_ul{{$selectBarId}} overflow-y-scroll max-h-52">
+        <li>
+            <div class="option null">
+                <p>Select team</p>
+            </div>
+        </li>
         @foreach($teams as $team)
             <li>
                 <div class="option {{$team->id}}">
-                    <div class="iconTeam{{$selectBarId}} justify-center flex items-center"><img width="40" height="40" src="{{asset($team->logo)}}" alt="Team image"></div>
+                    <div class="icon justify-center flex items-center"><img width="70" height="70" src="{{asset($team->logo)}}" alt="League image"></div>
                     <p>{{ucwords($team->name)}}</p>
                 </div>
             </li>
@@ -120,7 +123,7 @@
 <script>
     // Function to handle custom dropdown toggle
     function toggleDropdown() {
-        const dropdownOptions = document.querySelector('.select_ulTeam{{$selectBarId}}');
+        const dropdownOptions = document.querySelector('.select_ul{{$selectBarId}}');
         dropdownOptions.classList.toggle('show');
     }
 
@@ -130,34 +133,34 @@
         if (option) {
             const value = option.classList[1];
             const label = option.querySelector('p').textContent;
-            const selectElement = document.getElementById('team_id_home');
+            const selectElement = document.getElementById('{{$id}}');
             selectElement.value = value;
-            document.querySelector('.default_optionTeam{{$selectBarId}} li p').textContent = label;
+            document.querySelector('.default_option{{$selectBarId}} li p').textContent = label;
             toggleDropdown();
         }
     }
 
     // Event listeners for dropdown interaction
-    document.querySelector('.default_optionTeam{{$selectBarId}}').addEventListener('click', toggleDropdown);
-    document.querySelector('.select_ulTeam{{$selectBarId}}').addEventListener('click', selectOption);
+    document.querySelector('.default_option{{$selectBarId}}').addEventListener('click', toggleDropdown);
+    document.querySelector('.select_ul{{$selectBarId}}').addEventListener('click', selectOption);
 
     // Close the dropdown when clicking outside it
     window.addEventListener('click', function (event) {
-        const dropdownContainer = document.querySelector('.select_ulTeam{{$selectBarId}}{{$selectBarId}}');
+        const dropdownContainer = document.querySelector('.select_wrap{{$selectBarId}}');
         if (!dropdownContainer.contains(event.target)) {
-            document.querySelector('.select_ulTeam{{$selectBarId}}').classList.remove('show');
+            document.querySelector('.select_ul{{$selectBarId}}').classList.remove('show');
         }
     });
 
     $(document).ready(function(){
-        $(".default_optionTeam{{$selectBarId}}").click(function(){
+        $(".default_option{{$selectBarId}}").click(function(){
             $(this).parent().toggleClass("active");
         })
 
-        $(".select_ulTeam{{$selectBarId}} li").click(function(){
+        $(".select_ul{{$selectBarId}} li").click(function(){
             var currentele = $(this).html();
-            $(".default_optionTeam{{$selectBarId}} li").html(currentele);
-            $(this).parents(".select_ulTeam{{$selectBarId}}{{$selectBarId}}").removeClass("active");
+            $(".default_option{{$selectBarId}} li").html(currentele);
+            $(this).parents(".select_wrap{{$selectBarId}}").removeClass("active");
         })
     });
 </script>

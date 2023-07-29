@@ -82,7 +82,7 @@
     }
 </style>
 
-<select {{$attributes->merge(['class' => 'hidden'])}} >
+<select {{$attributes->merge(['class' => 'hidden'])}} onchange="toggleOtherFields(this)">
     <option disabled selected>Select a league</option>
     @foreach($leagues as $league)
         <option value="{{$league->id}}">{{ $league->name }}</option>

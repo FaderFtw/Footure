@@ -10,12 +10,12 @@
         @if($user->role === \App\Models\User::PLAYER)
             <a href="{{route('player', ['user' => $user])}}">
                 <div class="flex justify-center">
-                    <img id="showImage" class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
+                    <img id="showImage" class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset($user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
                 </div>
             </a>
         @else
             <div class="flex justify-center">
-                <img  class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
+                <img  class="rounded-full" width="30" src="{{ (!empty($user->image)) ? asset($user->image) : asset('avatars/avatar-'. $user->id .'.png')  }}" alt="Profile Image">
             </div>
         @endif
     </th>

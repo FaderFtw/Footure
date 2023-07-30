@@ -10,7 +10,7 @@
     </header>
 
     <div class="col-sm-10 flex justify-center p-6">
-        <img id="showImage" style="border-radius: 50%" width="150" src="{{ (!empty($user->image)) ? asset('profile-images/'.$user->image) : asset('avatars/avatar-'. auth()->id() .'.png')  }}" alt="Profile Image">
+        <img id="showImage" style="border-radius: 50%" width="150" src="{{ (!empty($user->image)) ? asset($user->image) : asset('avatars/avatar-'. auth()->id() .'.png')  }}" alt="Profile Image">
     </div>
 
 

@@ -22,14 +22,14 @@ class DatabaseSeeder extends Seeder
         User::factory()->admin()->create([
             'name' => 'Test Admin',
             'password' => 'fady',
-            'image' => 'TestAdmin.png',
+            'image' => 'profile-images/TestAdmin.png',
         ]);
 
         User::factory()->user()->create([
             'name' => 'Test User',
             'password' => 'fady',
             'email' => 'fady@fady.com',
-            'image' => 'Fady.png',
+            'image' => 'profile-images/Fady.png',
         ]);
 
         League::factory(5)->create();
@@ -47,17 +47,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(3)->player()->create([
-            'image' => 'Fady.png',
+            'image' => 'profile-images/Fady.png',
             'team_id' => 1
         ]);
 
         User::factory(3)->player()->create([
-            'image' => 'Fady.png',
+            'image' => 'profile-images/Fady.png',
             'team_id' => 2
         ]);
 
         User::factory(3)->player()->create([
-            'image' => 'Fady.png',
+            'image' => 'profile-images/Fady.png',
             'team_id' => 3
         ]);
 

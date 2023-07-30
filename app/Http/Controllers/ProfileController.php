@@ -33,11 +33,8 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        if ($request->file('image')){
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('profile-images'),$filename);
-            $request->user()->image = $filename;
+        if ($request->file('image') ?? false){
+            $request->user()->image = $request->file('image')->store('profiles-images');
         }
 
         if($request->user()->role == User::PLAYER){

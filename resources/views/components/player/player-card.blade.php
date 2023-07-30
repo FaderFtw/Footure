@@ -1,6 +1,6 @@
 <div class="mb-12 pt-6 bg-gray-100 rounded-xl" >
     <div class="mx-12 relative " title="Rating">
-        <img src="{{ (!empty($player->image)) ? asset('profile-images/'.$player->image) : asset('avatars/avatar-'. $player->id .'.png')  }}"
+        <img src="{{ (!empty($player->image)) ? asset($player->image) : asset('avatars/avatar-'. $player->id .'.png')  }}"
              class="border-2 border-gray-300 mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
 
         <span class="absolute bottom-0 right-0 bg-gray-500 rounded-full text-white w-8 h-8 inline-flex items-center justify-center p-1">{{$player->rating}}</span>

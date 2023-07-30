@@ -52,18 +52,22 @@ class AdminUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(, League $league)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        dd(request()->all());
-
         $attributes = $request->input();
 
+        if($request->file('image') ?? false)
+            $attributes['image'] = $request->file('image')->store('profile-images');
 
 
+        if($user->role == User::PLAYER){
+            $attributes['rating'] = intval(($attributes['atkRate'] + $attributes['midRate'] + $attributes['defRate']) / 3);
+        }
 
-        $league->update($attributes);
 
-        return redirect(route('admin.leagues'))->with('success', 'League Updated');
+        $user->update($attributes);
+
+        return redirect(route('admin.users'))->with('success', 'User Updated');
     }
 
     /**

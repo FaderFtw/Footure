@@ -72,10 +72,10 @@
                                     Stadium
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Edit team
+                                    Edit match
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Delete team
+                                    Delete match
                                 </th>
                             </tr>
                             </thead>

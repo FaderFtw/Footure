@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMatchRequest;
 use App\Http\Requests\UpdateMatchRequest;
 use App\Models\League;
 use App\Models\Matche;
+use App\Models\Score;
 use App\Models\Team;
 use DateTime;
 
@@ -63,6 +64,9 @@ class AdminMatchController extends Controller
         unset($attributes['dateOnly']);
         unset($attributes['time']);
 
+        if($attributes['date'] ?? false){
+            $attributes['score_id'] = null;
+        }
 
         if($attributes['stadium'] ?? false)
             if (!$attributes['stadium'])
@@ -79,7 +83,7 @@ class AdminMatchController extends Controller
      */
     public function destroy(Matche $matche)
     {
-        $matche->score()->delete();
+        $matche->score->delete();
         $matche->delete();
 
         return back()->with('success', 'Match Deleted');

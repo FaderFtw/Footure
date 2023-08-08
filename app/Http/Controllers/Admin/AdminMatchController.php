@@ -63,10 +63,7 @@ class AdminMatchController extends Controller
         $attributes = $request->input();
         unset($attributes['dateOnly']);
         unset($attributes['time']);
-
-        if($attributes['date'] ?? false){
-            $attributes['score_id'] = null;
-        }
+        
 
         if($attributes['stadium'] ?? false)
             if (!$attributes['stadium'])

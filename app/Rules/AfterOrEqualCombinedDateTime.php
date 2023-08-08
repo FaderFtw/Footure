@@ -5,6 +5,7 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 
 class AfterOrEqualCombinedDateTime implements ValidationRule
 {

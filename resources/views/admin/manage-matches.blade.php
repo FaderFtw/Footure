@@ -80,7 +80,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach(\App\Models\Matche::all() as $key => $match)
+                                @foreach(\App\Models\Matche::orderBy('date', 'asc')->get() as $key => $match)
                                     <x-admin.table-match-line :match="$match" :key="$key"/>
                                 @endforeach
                             </tbody>

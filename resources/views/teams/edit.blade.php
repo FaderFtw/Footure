@@ -85,8 +85,10 @@
                 </div>
 
 
-                <x-primary-button class="p-6">{{ __('Save') }}</x-primary-button>
-
+                <div class="flex space-x-4">
+                    <a href="{{route('admin.teams')}}"  class="self-center hover:underline">Back</a>
+                    <x-primary-button class="p-6" >{{ __('Save') }}</x-primary-button>
+                </div>
             </form>
 
         </x-panel>

@@ -20,12 +20,13 @@
                 @method('PATCH')
 
                 <input type="hidden" id="league_id" name="league_id" value="{{$match->league->id}}">
+                <input type="hidden" id="score_id" name="score_id" value="{{$match->score->id}}">
 
                 <div class="grid grid-cols-3 space-x-4">
 
                     <div class="flex-col self-center">
                         <x-form.input-label for="team_id_home" :value="__('Home Team')" class="ml-2"/>
-                        <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :oldTeam="$match->homeTeam" required autofocus autocomplete="team_id_home"/>
+                        <x-form.select-homeTeam id="team_id_home" name="team_id_home"  class="block"  :teams="$match->league->teamsOrderedByName" :oldTeam="$match->homeTeam" required autofocus autocomplete="team_id_home" />
                         <x-form.input-error class="mt-2" :messages="$errors->get('team_id_home')" />
                     </div>
 
@@ -65,12 +66,25 @@
 
                 @else
 
-                <div class="flex space-x-3">
-                    <h1>This match has already finished at : </h1>
-                    <time class="font-bold self-center">{{date('Y/m/d', strtotime($match->date))}}</time>
-                    <time >{{ date('H:i', strtotime($match->date)) }}</time>
-                </div>
+                    <div class="grid grid-cols-2 space-x-4">
 
+                        <div>
+                            <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
+                            <x-form.text-input id="dateOnly" name="dateOnly" type="date" class="mt-1 block w-full" :value="old('dateOnly',date('Y-m-d', strtotime($match->date)))" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()" readonly/>
+                            <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
+                        </div>
+
+                        <div>
+                            <x-form.input-label for="time" :value="__('Match Time')" />
+                            <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time',date('H:i', strtotime($match->date)))" required autofocus autocomplete="time" onchange="updateHiddenInput()" readonly/>
+                            <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
+                        </div>
+
+
+                        <input type="hidden" id="date" name="date" value="{{old('date',date('Y-m-d H:i', strtotime($match->date)))}}">
+
+
+                    </div>
                 @endif
 
                 <div>
@@ -96,8 +110,10 @@
 
                 </div>
 
-
-                <x-primary-button class="p-6" >{{ __('Save') }}</x-primary-button>
+                <div class="flex space-x-4">
+                    <a href="{{route('admin.matches')}}"  class="self-center hover:underline">Back</a>
+                    <x-primary-button class="p-6" >{{ __('Save') }}</x-primary-button>
+                </div>
 
 
                 <script>

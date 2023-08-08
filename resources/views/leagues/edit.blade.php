@@ -63,8 +63,10 @@
                     <x-form.input-error class="mt-2" :messages="$errors->get('logo')" />
                 </div>
 
-                <x-primary-button class="p-6">{{ __('Save') }}</x-primary-button>
-
+                <div class="flex space-x-4">
+                    <a href="{{route('admin.leagues')}}"  class="self-center hover:underline">Back</a>
+                    <x-primary-button class="p-6" >{{ __('Save') }}</x-primary-button>
+                </div>
             </form>
 
         </x-panel>

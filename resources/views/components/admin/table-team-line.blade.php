@@ -40,13 +40,13 @@
     </td>
 
     <td class="px-6 py-4">
-        <a href="{{route('team.edit', ['team' => $team])}}" class=" text-blue-600 dark:text-blue-500 font-bold hover:bg-gray-300 hover:text-white rounded-lg p-2">Edit</a>
+        <a href="{{route('team.edit', ['team' => $team])}}" class=" text-blue-600 dark:text-blue-500 font-bold hover:bg-gray-300 hover:text-white rounded-lg p-2">EDIT</a>
     </td>
 
     <td class="px-6 py-4">
         <button class="text-red-600 dark:text-blue-500 font-bold hover:bg-gray-300 hover:text-white rounded-lg p-2"
                 x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-team-deletion-{{ $key }}')">Delete</button>
+                x-on:click.prevent="$dispatch('open-modal', 'confirm-team-deletion-{{ $key }}')">DELETE</button>
     </td>
 </tr>
 

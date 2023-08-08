@@ -12,7 +12,18 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $table = 'teams';
+
     protected $guarded = [];
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhereHas('league', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+        });
+    }
 
     public function players (): HasMany
     {

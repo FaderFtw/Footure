@@ -9,7 +9,7 @@
     <main class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 py-12">
         <x-panel class="max-w-4xl mx-auto">
             <div class="flex space-x-2">
-                <h2 class="text-3xl font-bold self-center">Edit match in :</h2>
+                <h2 class="text-3xl font-bold self-center"><i class="fas fa-regular fa-clock mr-2"></i>Edit match in :</h2>
                 <x-league.league-icon :width="50" :height="50" :league="$match->league"/>
             </div>
 

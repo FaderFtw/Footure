@@ -9,7 +9,7 @@
     <main class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 py-12">
         <x-panel class="max-w-4xl mx-auto">
             <div class="flex space-x-2">
-                <h2 class="text-3xl font-bold self-center">Edit
+                <h2 class="text-3xl font-bold self-center"><i class="fas fa-solid fa-user mr-2"></i>Edit
                     @if($user->role === \App\Models\User::ADMIN)
                         Admin
                     @elseif($user->role === \App\Models\User::PLAYER)

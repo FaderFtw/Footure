@@ -11,7 +11,8 @@
 
     <main class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 py-12">
         <x-panel class="max-w-4xl mx-auto">
-            <h2 class="text-3xl mb-4"><i class="fas fa-solid fa-trophy mr-2"></i> Edit Team : <span class="font-bold">{{$team->name}}</span></h2>
+            <h2 class="text-3xl mb-4 flex"><svg height="1.5em" class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 57.439 57.439" xml:space="preserve" fill="#a1a1a1" stroke="#a1a1a1" stroke-width="0.00057439" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path style="fill:#757575;" d="M16.674,12.702c3.807-2.249,7.797-3.388,11.885-3.39c5.597,0,10.098,2.148,12.207,3.373v12.889 h3.285V10.895c0,0-6.408-4.868-15.494-4.868c-4.542,0.002-9.754,1.218-15.168,4.868v14.679h3.285L16.674,12.702L16.674,12.702z"></path> <polygon style="fill:#757575;" points="28.72,46.597 21.115,38.449 16.621,38.449 28.72,51.413 40.818,38.449 36.325,38.449 "></polygon> <path style="fill:#757575;" d="M57.439,38.893l-2.847-4.052l2.841-4.078H46.107V26.82H11.511v3.943H0.006l2.841,4.078L0,38.893 h12.89v-1.388h31.66v1.388H57.439z M11.644,37.648H2.398l1.97-2.801l-1.976-2.836h9.119v5.494h0.133L11.644,37.648L11.644,37.648 z M45.795,37.506h0.313v-5.494h8.938l-1.974,2.838l1.968,2.8h-9.246L45.795,37.506L45.795,37.506z"></path> </g> </g> </g> </g></svg>
+                Edit Team : <span class="font-bold">{{$team->name}}</span></h2>
 
             <div class="flex justify-center p-6">
                 <img id="showImage" width="150" src="{{asset($team->logo)}}" alt="Team Logo">

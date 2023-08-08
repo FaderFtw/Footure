@@ -13,6 +13,8 @@ class Matche extends Model
 {
     use HasFactory;
 
+    protected $table = 'matches';
+
     protected $guarded = [];
 
     public function league (): BelongsTo

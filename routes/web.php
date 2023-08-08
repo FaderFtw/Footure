@@ -72,8 +72,8 @@ Route::group(['middleware' => ['auth', 'adminOnly']], function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/leagues', [LeagueController::class, 'index'])->name('leagues');
     Route::get('/teams', [TeamController::class, 'index'])->name('teams');
-
     Route::get('/matches/{matche:date}', [MactheController::class, 'matchesByDate'])->name('matches');
+
     Route::get('/leagues/{league:slug}', [LeagueController::class, 'show'])->name('league');
     Route::get('/teams/{team:slug}', [TeamController::class, 'show'])->name('team');
     Route::get('/player/{user:username}', [UserController::class, 'show'])->name('player');

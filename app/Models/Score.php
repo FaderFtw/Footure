@@ -11,6 +11,8 @@ class Score extends Model
 {
     use HasFactory;
 
+    protected $table = 'scores';
+
     public function match (): hasOne
     {
         //hasOne, hasMany, belongsTo, belongToMany

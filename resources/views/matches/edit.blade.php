@@ -40,25 +40,38 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 space-x-4">
 
-                    <div>
-                        <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
-                        <x-form.text-input id="dateOnly" name="dateOnly" type="date" class="mt-1 block w-full" :value="old('dateOnly',date('Y-m-d', strtotime($match->date)))" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
-                        <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
+                @if(strtotime($match->date) >= strtotime(date('Y-m-d H:i')))
+
+                    <div class="grid grid-cols-2 space-x-4">
+
+                        <div>
+                            <x-form.input-label for="dateOnly" :value="__('Select Match date')" />
+                            <x-form.text-input id="dateOnly" name="dateOnly" type="date" class="mt-1 block w-full" :value="old('dateOnly',date('Y-m-d', strtotime($match->date)))" required autofocus autocomplete="dateOnly" onchange="updateHiddenInput()"/>
+                            <x-form.input-error class="mt-2" :messages="$errors->get('date')" />
+                        </div>
+
+                        <div>
+                            <x-form.input-label for="time" :value="__('Match Time')" />
+                            <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time',date('H:i', strtotime($match->date)))" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
+                            <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
+                        </div>
+
+
+                        <input type="hidden" id="date" name="date" value="{{old('date',date('Y-m-d H:i', strtotime($match->date)))}}">
+
+
                     </div>
 
-                    <div>
-                        <x-form.input-label for="time" :value="__('Match Time')" />
-                        <x-form.text-input id="time" name="time" type="time" class="mt-1 block w-full" :value="old('time',date('H:i', strtotime($match->date)))" required autofocus autocomplete="time" onchange="updateHiddenInput()"/>
-                        <x-form.input-error class="mt-2" :messages="$errors->get('time')" />
-                    </div>
+                @else
 
-
-                    <input type="hidden" id="date" name="date" value="{{old('date',date('Y-m-d H:i', strtotime($match->date)))}}">
-
-
+                <div class="flex space-x-3">
+                    <h1>This match has already finished at : </h1>
+                    <time class="font-bold self-center">{{date('Y/m/d', strtotime($match->date))}}</time>
+                    <time >{{ date('H:i', strtotime($match->date)) }}</time>
                 </div>
+
+                @endif
 
                 <div>
                     <x-form.input-label for="desc" :value="__('Description')" />
@@ -109,4 +122,3 @@
     </main>
 
 </x-app-layout>
-

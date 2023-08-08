@@ -19,6 +19,5 @@
             <a href="#"><i id="gmail" class="fas fa-envelope"></i></a>
         </div>
 
-
     </div>
 </x-app-layout>

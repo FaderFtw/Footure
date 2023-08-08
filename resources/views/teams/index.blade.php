@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <main class="min-h-screen max-w-6xl mx-auto my-10 lg:mt-20 space-y-6">
-        <div class="bg-white p-4 rounded-3xl shadow sm:p-8">
+    <main class="min-h-screen max-w-6xl mx-auto my-10 lg:mt-20 ">
+        <div class="bg-white p-4 rounded-3xl shadow sm:p-8 space-y-6">
             <div class="flex justify-end">
-                <form method="GET" action="#" class="mb-6 w-1/2">
+                <form method="GET" action="#" class="w-1/2">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
                     <div class="relative">
                         <div class="absolute flex inset-y-0 items-center pr-24 right-0">
@@ -26,6 +26,7 @@
                         <x-team.team-card :team='$team' class="col-span-2 mb-4"/>
                     @endforeach
                 </div>
+                {{$teams->links()}}
             @else
                 <p class="text-center font-bold">No teams yet. Please check back later.</p>
             @endif

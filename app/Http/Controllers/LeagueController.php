@@ -15,7 +15,11 @@ class LeagueController extends Controller
      */
     public function index()
     {
-            return view('leagues.index', ['leagues' => League::latest()->filter(request(['search']))->with(['teams', 'matches'])->orderBy('name')->get(),]);
+            return view('leagues.index', ['leagues' => League::latest()->filter(request(['search']))
+                ->with(['teams', 'matches'])
+                ->orderBy('name')
+                ->paginate(5)->withQueryString()
+            ]);
     }
 
 

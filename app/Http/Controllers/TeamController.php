@@ -13,7 +13,11 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return view('teams.index',['teams' => Team::latest()->filter(request(['search']))->with('league')->orderBy('name')->get()]);
+        return view('teams.index',['teams' => Team::latest()->filter(request(['search']))
+            ->with('league')
+            ->orderBy('name')
+            ->paginate(6)->withQueryString()
+        ]);
     }
 
     /**

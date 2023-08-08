@@ -76,7 +76,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(\App\Models\Team::all() as $key => $team)
+                        @foreach(\App\Models\Team::orderBy('name')->get() as $key => $team)
                             <x-admin.table-team-line :team="$team" :key="$key"/>
                         @endforeach
                         </tbody>

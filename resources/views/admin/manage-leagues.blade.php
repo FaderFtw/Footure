@@ -73,7 +73,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach(\App\Models\League::all() as $key => $league)
+                            @foreach(\App\Models\League::orderBy('name')->get() as $key => $league)
                                   <x-admin.table-league-line :league="$league" :key="$key"/>
                                @endforeach
                         </tbody>

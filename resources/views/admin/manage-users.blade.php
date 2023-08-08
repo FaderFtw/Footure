@@ -78,7 +78,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach(\App\Models\User::all() as $key => $user)
+                    @foreach(\App\Models\User::orderBy('role', 'asc')->get() as $key => $user)
                         <x-admin.table-user-line :user="$user" :key="$key"/>
                     @endforeach
                     </tbody>

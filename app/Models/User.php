@@ -47,6 +47,15 @@ class User extends Authenticatable
     const PLAYER = 2;
     const ROLES = [0,1,2];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+        $query
+            ->where('name', 'like', '%' . $search . '%')
+            ->orWhere('username', 'like', '%' . $search . '%')
+            ->orWhere('country', 'like', '%' . $search . '%')
+        );
+    }
+
     public function team (): BelongsTo  //$post->user
     {
         //hasOne, hasMany, belongsTo, belongToMany

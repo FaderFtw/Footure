@@ -15,7 +15,7 @@ class MactheController extends Controller
      */
     public function index()
     {
-        return view('matches.index', ['matches' => Matche::with(['homeTeam','awayTeam','league','score'])->get()]);
+        return view('matches.index', ['matches' => Matche::latest()->filter(request(['search']))->with(['homeTeam','awayTeam','league','score'])->get()]);
     }
 
     /**
@@ -68,7 +68,7 @@ class MactheController extends Controller
 
     public function matchesByDate(Request $request, $date)
     {
-        $matches = Matche::whereDate('date', $date)->with('league', 'homeTeam', 'awayTeam', 'score')->orderBy('date')->get();
+        $matches = Matche::latest()->filter(request(['search']))->whereDate('date', $date)->with('league', 'homeTeam', 'awayTeam', 'score')->orderBy('date')->get();
         return view('matches.index', ['matches' => $matches]);
     }
 }

@@ -17,6 +17,20 @@ class Matche extends Model
 
     protected $guarded = [];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->whereHas('homeTeam', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+                ->orWhereHas('awayTeam', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })
+                    ->orWhereHas('league', function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%');
+                    });
+        });
+    }
+
     public function league (): BelongsTo
     {
         //hasOne, hasMany, belongsTo, belongToMany

@@ -50,7 +50,7 @@
             const currentDate = `${currYear}-${(currMonth + 1 < 10 ? '0' : '')}${currMonth + 1}-${(i < 10 ? '0' : '')}${i}`;
             const parts = window.location.href.split('/');
             let isTheDay = currentDate === parts[parts.length - 1] ? "active" : "";
-            let isToday = currentDate === new Date().toISOString().slice(0, 10) ? "font-bold text-green-300" : "";
+            let isToday = currentDate === new Date().toISOString().slice(0, 10) ? "font-extrabold text-green-500" : "";
             liTag += `<li class="${isTheDay}"><a href="/matches/${currentDate}" class="${isToday}" data-date="${currentDate}">${i}</a></li>`;
         }
 

@@ -63,7 +63,7 @@
                         <div class="flex space-x-2">
                             <i class="fas fa-solid fa-trophy"></i> <x-form.input-label for="league_id" :value="__('League')" />
                         </div>
-                        <x-form.select-league id="league_id" name="league_id"  class="block"  :leagues="\App\Models\League::orderBy('name')->get()" autofocus autocomplete="league_id"/>
+                        <x-form.select-league id="league_id" name="league_id"  class="block"  :leagues="\App\Models\League::orderBy('name')->get()" :oldLeague="$team->league" autofocus autocomplete="league_id"/>
                         <x-form.input-error class="mt-2" :messages="$errors->get('league_id')" />
                     </div>
 

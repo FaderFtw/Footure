@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('date');
             $table->string('stadium');
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->string('referee');
             $table->foreignId('team_id_home')->constrained();
             $table->foreignId('team_id_away')->constrained();

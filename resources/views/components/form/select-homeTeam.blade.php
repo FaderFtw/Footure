@@ -112,7 +112,6 @@
                 <p>Select team</p>
             </li>
         @endif
-
     </ul>
     <ul class="select_ulHomeTeam overflow-y-scroll max-h-52">
         <li>

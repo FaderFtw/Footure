@@ -91,10 +91,19 @@
 
 <div class="select_wrap border-2 border-gray-200 rounded-lg ">
     <ul class="default_option">
-        <li>
-            <div class="icon"></div>
-            <p>Select league</p>
-        </li>
+        @if($oldLeague)
+            <li>
+                <div class="option {{$oldLeague->id}}">
+                    <div class="icon justify-center flex items-center"><img width="20" height="20" src="{{asset($oldLeague->logo)}}" alt="League image"></div>
+                    <p>{{ucwords($oldLeague->name)}}</p>
+                </div>
+            </li>
+        @else
+            <li>
+                <div class="icon"></div>
+                <p>Select league</p>
+            </li>
+        @endif
     </ul>
     <ul class="select_ul overflow-y-scroll max-h-52">
         <li>

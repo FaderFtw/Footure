@@ -63,7 +63,7 @@ class AdminMatchController extends Controller
         $attributes = $request->input();
         unset($attributes['dateOnly']);
         unset($attributes['time']);
-        
+
 
         if($attributes['stadium'] ?? false)
             if (!$attributes['stadium'])
@@ -80,7 +80,8 @@ class AdminMatchController extends Controller
      */
     public function destroy(Matche $matche)
     {
-        $matche->score->delete();
+        if($matche->score)
+            $matche->score->delete();
         $matche->delete();
 
         return back()->with('success', 'Match Deleted');

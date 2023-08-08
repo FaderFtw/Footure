@@ -20,7 +20,9 @@
                 @method('PATCH')
 
                 <input type="hidden" id="league_id" name="league_id" value="{{$match->league->id}}">
-                <input type="hidden" id="score_id" name="score_id" value="{{$match->score->id}}">
+                @if($match->score)
+                    <input type="hidden" id="score_id" name="score_id" value="{{$match->score->id}}">
+                @endif
 
                 <div class="grid grid-cols-3 space-x-4">
 

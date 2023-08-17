@@ -1,8 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-extrabold  text-3xl leading-tight">
-            {{__('Team Management')}}
-        </h2>
+        <div class="flex space-x-6 items-center">
+            <a href="{{route("admin_dashboard")}}" class="hover:scale-150 hover:-translate-x-5 transition-transform duration-300 ease-in-out transform origin-center">
+                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+            </a>
+
+
+            <h2 class="font-extrabold  text-3xl leading-tight">
+                {{__('Team Management')}}
+            </h2>
+
+        </div>
     </x-slot>
 
     <main class="py-12 max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -91,11 +101,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(\App\Models\Team::latest()->filter(request(['search']))->orderBy('name')->get() as $key => $team)
+                        @php
+                            $teams = \App\Models\Team::latest()->filter(request(['search']))
+                                                ->orderBy('name')
+                                                ->paginate(5)->withQueryString();
+                        @endphp
+                        @foreach($teams as $key => $team)
                             <x-admin.table-team-line :team="$team" :key="$key"/>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                <div class="mt-4">
+                    {{$teams->links()}}
                 </div>
             @else
                 <div class="flex justify-center items-center"><p class="font-bold">No teams yet.</p> </div>

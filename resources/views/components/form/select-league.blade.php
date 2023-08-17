@@ -1,3 +1,5 @@
+@props(['oldLeague' => null, 'leagues'])
+
 <style>
 
     .select_wrap{

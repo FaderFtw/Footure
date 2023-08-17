@@ -33,9 +33,10 @@
         </h2>
     </x-slot>
 
-    <main class="main max-w-6xl mx-auto my-10 lg:mt-20 space-y-6 flex justify-between">
+    <main class="main max-w-6xl mx-auto my-10 lg:mt-20 flex justify-between">
         <x-calendar class="calendar"></x-calendar>
         <div class="matches bg-white ml-10 w-3/4 h-1/3 p-4 rounded-3xl shadow sm:p-8 flex-col">
+
             <div class="flex justify-end">
                 <form method="GET" action="#" class="mb-6 w-3/4">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
@@ -63,9 +64,15 @@
                    <x-match.match-line :date='false' :match='$matche' class="{{$loop->iteration == 1 ? 'mt-0' : 'pt-5 border-t-2'}}"/>
                 @endforeach
 
+                <div class="mt-6">
+                    {{$matches->links()}}
+                </div>
+
             @else
                 <p class="text-center font-bold">No matches yet. Please check back later.</p>
             @endif
         </div>
     </main>
 </x-app-layout>
+
+
